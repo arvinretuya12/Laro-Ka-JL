@@ -1,0 +1,371 @@
+/* Custom Fonts */
+@font-face {
+    font-family: 'DetailsFont';
+    src: url('../assets/fonts/8bitOperatorPlus8-Bold.ttf') format('truetype'); 
+}
+
+@font-face {
+    font-family: 'JoloverseFont';
+    src: url('../assets/fonts/Point.ttf') format('truetype'); 
+}
+
+/* Base Body Style */
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url('../assets/images/BACKGROUND.png');
+    background-repeat: repeat; 
+    background-size: 400px; 
+    background-color: #390055; 
+    font-family: 'DetailsFont', sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* --- LANDING PAGE (DESKTOP) --- */
+#landing-page {
+    position: relative;
+    width: 100%;
+    max-width: 1280px; /* Matches Figma Desktop constraint */
+    height: 100vh;
+    display: block; 
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.presents-text {
+    position: absolute;
+    top: 20vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-family: 'JoloverseFont', sans-serif;
+    color: #a0862d;
+    text-shadow: 2px 2px 0px #503e00;
+    font-size: 24px;
+    letter-spacing: 2px;
+    z-index: 10;
+}
+
+.main-logo {
+    position: absolute;
+    top: 50%;
+    left: 8%; 
+    transform: translateY(-50%); 
+    width: 45%; 
+    max-width: 550px;
+    z-index: 10;
+    object-fit: contain;
+}
+
+.jl-picture {
+    position: absolute;
+    bottom: 150px; /* Tucked cleanly behind the floating banner */
+    right: 8%; 
+    width: 40%; 
+    max-width: 500px;
+    height: auto;
+    max-height: 70vh; 
+    object-fit: contain;
+    object-position: bottom center; 
+    z-index: 15;
+}
+
+/* Floating Pixel Elements (Positioned per Figma Desktop) */
+.floating-element {
+    position: absolute;
+    width: 55px; 
+    height: auto;
+    z-index: 8;
+    filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.5));
+}
+
+.element-1 { display: none; } /* Question Mark hidden in desktop layout */
+.element-2 { top: 25vh; left: 16%; transform: rotate(-15deg); }      /* Controller */
+.element-3 { top: 30vh; right: 20%; transform: rotate(15deg); }      /* Lightning */
+.element-4 { top: 38vh; left: 52%; transform: rotate(-10deg); }      /* Ghost */
+.element-5 { bottom: 35vh; left: 10%; transform: rotate(-20deg); }   /* Pacman */
+.element-6 { top: 12vh; left: 50%; transform: translateX(-50%); width: 65px; } /* Heart */
+
+/* Floating Rounded Bottom Banner */
+.bottom-banner {
+    position: absolute;
+    bottom: 30px; /* Floats above the bottom edge */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1100px;
+    height: auto;
+    min-height: 100px;
+    background-color: #e6e6e6; /* Figma Light Gray */
+    border-radius: 15px; /* Rounded pill shape */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    z-index: 20;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.banner-text-left h2, .banner-text-right h2 {
+    margin: 0;
+    color: #794ea3; /* Match Figma text color */
+    font-weight: normal;
+    text-shadow: none; /* Removed shadow per Figma */
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.banner-text-right h2 {
+    text-align: right;
+}
+
+/* Start Button */
+.start-btn {
+    font-family: 'DetailsFont', sans-serif;
+    background-color: #ff3333;
+    color: #fff;
+    border: 3px solid #990000;
+    padding: 15px 40px;
+    font-size: 18px;
+    line-height: 1.3;
+    cursor: pointer;
+    text-shadow: 2px 2px 0px #660000;
+    box-shadow: 0 5px 15px rgba(255, 51, 51, 0.4);
+    border-radius: 8px; /* Slightly rounded per Figma */
+    transition: transform 0.1s;
+}
+
+.start-btn:active {
+    transform: scale(0.95);
+}
+
+/* --- REGISTRATION FORM (Hidden by default) --- */
+#reg-form {
+    display: none;
+    width: 90%;
+    max-width: 600px;
+    background: rgba(57, 0, 85, 0.95);
+    border: 5px solid #a0862d;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    margin: 40px auto; 
+    z-index: 30;
+    position: relative;
+}
+
+#reg-form h2 {
+    color: #a0862d;
+    text-align: center;
+    font-size: 32px;
+    -webkit-text-stroke: 1px #503e00;
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #f0eadd;
+    margin-bottom: 8px;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 3px solid #863fa9;
+    background: #222;
+    color: #fff;
+    font-family: 'Arial', sans-serif; 
+    font-size: 16px;
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: #a0862d;
+}
+
+.terms-box {
+    height: 100px;
+    overflow-y: scroll;
+    background: #111;
+    border: 2px solid #863fa9;
+    color: #ccc;
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.submit-btn {
+    width: 100%;
+    background-color: #a0862d;
+    color: #fff;
+    border: 4px solid #503e00;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'DetailsFont', sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.submit-btn:hover { background-color: #c4a73e; }
+
+
+/* =========================================
+   MOBILE RESPONSIVENESS (Matches image_d5977f.jpg)
+   ========================================= */
+@media (max-width: 768px) {
+    body {
+        background-size: 250px; 
+    }
+
+    /* 1. Heart at the very top */
+    .element-6 { 
+        top: 5vh; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        width: 35px; 
+    } 
+
+    /* 2. Text right below the heart */
+    .presents-text {
+        top: 11vh;
+        font-size: 12px; 
+        z-index: 10; 
+    }
+
+    /* 3. Logo positioned tightly under the text */
+    .main-logo {
+        top: 5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 75%; /* Scaled down to match the image */
+        max-width: 300px;
+        z-index: 10; 
+    }
+
+    /* 4. JL sitting precisely behind the top edge of the banner */
+    .jl-picture {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 85%; 
+        max-width: 380px;
+        height: auto;
+        max-height: 30vh; 
+        bottom: 270px; /* Locks him right behind the banner's top edge */
+        object-position: bottom center;
+        z-index: 15; 
+    }
+
+    /* 5. Floating Elements positioned exactly as shown */
+    .floating-element { width: 35px; } 
+    .element-3 { top: 18vh; right: 12%; transform: rotate(15deg); }      /* Lightning (Top Right) */
+    .element-2 { top: 32vh; left: 10%; transform: rotate(-25deg); }      /* Controller (Mid Left) */
+    .element-5 { top: 48vh; left: 10%; transform: rotate(-15deg); }      /* Pacman (Lower Left) */
+    
+    /* Restored the Ghost peeking out near the bear */
+    .element-4 { 
+        display: block; 
+        top: 38vh; 
+        right: 5%; 
+        z-index: 12; /* Places it between the logo and JL */
+    }            
+
+    /* 6. The floating card banner */
+    .bottom-banner {
+        bottom: 20px;
+        flex-direction: column;
+        justify-content: space-evenly; 
+        height: 270px; /* Fixed height to match the offset of JL */
+        width: 85%;
+        padding: 20px 15px;
+        border-radius: 15px;
+        z-index: 20; 
+    }
+
+    .banner-text-left h2, .banner-text-right h2 {
+        text-align: center;
+        font-size: 12px;
+        line-height: 1.6;
+        letter-spacing: 1px;
+    }
+
+    /* Start button */
+    .start-btn {
+        width: 80%;
+        max-width: 250px;
+        padding: 18px;
+        font-size: 16px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(255, 51, 51, 0.5); 
+    }
+
+    /* Registration form mobile tweaks */
+    #reg-form {
+        width: 90%;
+        padding: 25px 15px;
+        margin: 20px auto;
+    }
+    
+    #reg-form h2 {
+        font-size: 24px;
+    }
+}
+
+/* =========================================
+   POP-UP MODAL (Confirmation / Errors)
+   ========================================= */
+.modal-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Dark transparent background */
+    z-index: 100; /* Stays on top of everything */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-box {
+    background: #390055;
+    border: 5px solid #a0862d;
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 0 30px #a0862d;
+}
+
+.modal-box h2 {
+    font-family: 'DetailsFont', sans-serif;
+    margin-top: 0;
+    font-size: 24px;
+    text-shadow: 2px 2px 0px #111;
+}
+
+.modal-box p {
+    font-family: 'Arial', sans-serif;
+    color: #f0eadd;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
