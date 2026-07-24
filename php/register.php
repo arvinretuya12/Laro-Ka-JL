@@ -17,22 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Define full name early so it is available for all logs
     $full_name = $first_name . ' ' . $last_name;
 
-    // // --- NEW: CHECK EVENT CAPACITY ---
-    // $limit_check = $conn->query("SELECT setting_value FROM event_settings WHERE setting_key = 'max_registrants'");
-    // $max_registrants = $limit_check->fetch_assoc()['setting_value'];
+    // --- NEW: CHECK EVENT CAPACITY ---
+    $limit_check = $conn->query("SELECT setting_value FROM event_settings WHERE setting_key = 'max_registrants'");
+    $max_registrants = $limit_check->fetch_assoc()['setting_value'];
 
-    // $count_check = $conn->query("SELECT COUNT(*) as total FROM registrants");
-    // $current_total = $count_check->fetch_assoc()['total'];
+    $count_check = $conn->query("SELECT COUNT(*) as total FROM registrants");
+    $current_total = $count_check->fetch_assoc()['total'];
 
-    // if ($current_total >= $max_registrants) {
-    //     echo json_encode([
-    //         "status" => "full", 
-    //         "message" => "Registration is officially closed! We have reached maximum capacity."
-    //     ]);
+    if ($current_total >= $max_registrants) {
+        echo json_encode([
+            "status" => "full", 
+            "message" => "Registration is officially closed! We have reached maximum capacity."
+        ]);
         
-    //     log_activity($conn, 'System', $full_name, "Attempted to register but event was full.");
-    //     exit();
-    // }
+        log_activity($conn, 'System', $full_name, "Attempted to register but event was full.");
+        exit();
+    }
 
     // 1. CHECK FOR DUPLICATES (Check for BOTH Name OR Email)
     $check_sql = "SELECT first_name, last_name, email FROM registrants 

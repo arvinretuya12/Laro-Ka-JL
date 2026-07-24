@@ -1,0 +1,24 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Enabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "sshOptions": {
+                "port": 22,
+                "host": "54.79.167.97",
+                "username": "ubuntu",
+                "privateKeyPath": "C:\\Users\\AJ\\Desktop\\laro-key.pem"
+            },
+            "driver": "MySQL",
+            "name": "EC2 MySQL",
+            "database": "laro_event_db",
+            "username": "root"
+        }
+    ]
+}
