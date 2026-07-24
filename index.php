@@ -43,7 +43,7 @@ $is_full = ($current_total >= $max_registrants);
         <!-- Floating Rounded Banner -->
         <div class="bottom-banner">
             <div class="banner-text-left">
-                <h2>25TH BIRTHDAY<br>CELEBRATION</h2>
+                <h2>25TH BIRTHDAY<br>CELEBRATION - TEST</h2>
             </div>
             
             <button class="start-btn" onclick="showForm()">START THE<br>GAME!</button>
