@@ -77,7 +77,7 @@ $is_full = ($current_total >= $max_registrants);
             <ul style="text-align: left; color: #ccc; font-family: 'Arial', sans-serif; font-size: 14px; line-height: 1.5; padding-left: 20px; margin-bottom: 0;">
                 <li style="margin-bottom: 8px;"><strong>1. Player Profile:</strong> Fill out your details below.</li>
                 <li style="margin-bottom: 8px;"><strong>2. Insert Coin:</strong> Scan the GCash QR and upload your proof of payment.</li>
-                <li style="margin-bottom: 8px;"><strong>3. Wait:</strong> Admin Verification takes up to 24 hours.</li>
+                <li style="margin-bottom: 8px;"><strong>3. Wait:</strong> Admin Verification takes up to 24-48 hours.</li>
                 <li style="margin-bottom: 8px;"><strong>4. Recieve an Email:</strong> Receive your unique QR Code via email.</li>
                 <li style="margin-bottom: 8px;"><strong>5. Claim:</strong> Present your QR Code for scanning to the registration booth to claim your arcade and food stall tickets. Enjoy!</li>
             </ul>
