@@ -91,7 +91,7 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
                         echo "<tr>";
                         echo "<td>#" . $row['id'] . "</td>";
                         
-                        // --- UPDATED: Name & Ticket ID Column ---
+                        // --- Name & Ticket ID Column ---
                         echo "<td style='font-weight: bold; color: #fff;'>";
                         echo htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']);
                         
@@ -101,13 +101,17 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
                             echo "<br><span style='font-size: 11px; color: #666; font-style: italic; font-weight: normal;'>(Pending Verification)</span>";
                         }
                         echo "</td>";
-                        // ----------------------------------------
                         
-                        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
+                        // --- UPDATED: Email Column with Edit Icon ---
+                        echo "<td>";
+                        echo htmlspecialchars($row['email']);
+                        echo " <button type='button' title='Edit Email' onclick=\"openEditEmailModal({$row['id']}, '" . htmlspecialchars($row['email'], ENT_QUOTES) . "')\" style='background: none; border: none; color: #a0862d; cursor: pointer; font-size: 13px; margin-left: 5px;'>✏️</button>";
+                        echo "</td>";
+
                         echo "<td><a href='../uploads/" . htmlspecialchars($row['payment_proof']) . "' target='_blank' class='btn-view'>View Receipt</a></td>";
                         echo "<td><span class='status-badge {$status_class}'>{$status}</span></td>";
                         
-                        // NEW: Check-In Status Column
+                        // Check-In Status Column
                         echo "<td>";
                         if ($status == 'Verified') {
                             if ($row['is_scanned'] == 1) {
@@ -120,25 +124,26 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
                         }
                         echo "</td>";
 
+                        // --- UPDATED: Action Column ---
                         echo "<td>";
-                        
-                        // Show Action Buttons if not Verified
                         if ($status !== 'Verified') {
                             echo "<form action='verify_payment.php' method='POST' style='display:inline;'>
                                     <input type='hidden' name='user_id' value='" . $row['id'] . "'>
                                     <input type='hidden' name='user_email' value='" . htmlspecialchars($row['email']) . "'>
                                     <button type='submit' class='btn-verify'>Verify</button>
-                                  </form>";
+                                  </form> ";
                                   
                             echo "<button type='button' class='btn-flag' onclick=\"openFlagModal({$row['id']}, '" . htmlspecialchars($row['email']) . "', '" . htmlspecialchars($row['first_name']) . "')\">Flag Issue</button>";
                         } else {
-                            echo "Verified";
+                            echo "<form action='resend_email.php' method='POST' style='display:inline;'>
+                                    <input type='hidden' name='user_id' value='" . $row['id'] . "'>
+                                    <button type='submit' onclick=\"return confirm('Resend ticket email to this player?')\" style='background: #3498db; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; font-size: 12px; font-weight: bold;'>Resend Ticket</button>
+                                  </form>";
                         }
                         echo "</td>";
                         echo "</tr>";
                     }
                 } else {
-                    // Updated colspan from 6 to 7 because of the new column
                     echo "<tr><td colspan='7' style='text-align:center;'>No players registered yet.</td></tr>";
                 }
                 ?>
@@ -146,6 +151,24 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
         </table>
     </div>
     
+    <!-- EDIT EMAIL MODAL -->
+    <div class="admin-modal-overlay" id="editEmailModal">
+        <div class="admin-modal-box">
+            <h3>EDIT PLAYER EMAIL</h3>
+            <form action="update_email.php" method="POST">
+                <input type="hidden" name="user_id" id="edit_email_user_id">
+                
+                <p style="color: #ccc; font-size: 14px; margin-bottom: 10px;">Enter the corrected email address:</p>
+                <input type="email" name="new_email" id="edit_email_input" required style="width: 100%; padding: 10px; margin-bottom: 15px; background: #222; color: #fff; border: 1px solid #863fa9; box-sizing: border-box;">
+                
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" style="background: #2ecc71; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 3px; width: 100%; font-weight: bold;">Update Email</button>
+                    <button type="button" onclick="closeEditEmailModal()" style="background: #555; color: white; padding: 10px; border: none; cursor: pointer; border-radius: 3px; width: 100%;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- EDIT LIMIT MODAL -->
     <div class="admin-modal-overlay" id="limitModal">
         <div class="admin-modal-box">
@@ -162,10 +185,6 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
         </div>
     </div>
 
-    <script>
-        function openLimitModal() { document.getElementById('limitModal').style.display = 'flex'; }
-        function closeLimitModal() { document.getElementById('limitModal').style.display = 'none'; }
-    </script>
     <!-- FLAG ISSUE MODAL -->
     <div class="admin-modal-overlay" id="flagModal">
         <div class="admin-modal-box">
@@ -191,6 +210,16 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
     </div>
 
     <script>
+        function openEditEmailModal(id, email) {
+            document.getElementById('edit_email_user_id').value = id;
+            document.getElementById('edit_email_input').value = email;
+            document.getElementById('editEmailModal').style.display = 'flex';
+        }
+        function closeEditEmailModal() {
+            document.getElementById('editEmailModal').style.display = 'none';
+        }
+        function openLimitModal() { document.getElementById('limitModal').style.display = 'flex'; }
+        function closeLimitModal() { document.getElementById('limitModal').style.display = 'none'; }
         function openFlagModal(id, email, name) {
             document.getElementById('flag_user_id').value = id;
             document.getElementById('flag_user_email').value = email;
