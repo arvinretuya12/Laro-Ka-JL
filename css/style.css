@@ -371,12 +371,15 @@ body {
 }
 
 .custom-file-upload {
+    width: 100%; /* Makes sure it doesn't try to be wider than the form */
+    box-sizing: border-box; /* THE MAGIC FIX: Forces padding and borders to stay inside the width limits */
+    
     display: block;
     background: #222;
-    border: 2px dashed #a0862d; /* Gold dashed border */
+    border: 2px dashed #a0862d;
     color: #f0eadd;
     text-align: center;
-    padding: 25px 15px; /* Huge padding for easy mobile tapping */
+    padding: 25px 15px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;

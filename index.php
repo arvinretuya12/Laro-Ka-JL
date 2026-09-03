@@ -266,6 +266,20 @@ $is_full = ($current_total >= $max_registrants);
                 window.scrollTo(0, 0);
             }
         }
+
+        // Function to show the selected image file name
+        function updateFileName(input) {
+            const fileNameSpan = document.getElementById('file-name');
+            if (input.files && input.files.length > 0) {
+                // Change text to the file name and make it green
+                fileNameSpan.innerHTML = '✅ ' + input.files[0].name;
+                fileNameSpan.style.color = '#2ecc71'; 
+            } else {
+                // Reset if they cancel
+                fileNameSpan.innerHTML = '📸 TAP HERE TO UPLOAD RECEIPT';
+                fileNameSpan.style.color = '#f0eadd';
+            }
+        }
     </script>
 
 
