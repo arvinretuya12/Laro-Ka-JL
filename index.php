@@ -131,7 +131,7 @@ $is_full = ($current_total >= $max_registrants);
                 <label>TERMS AND CONDITIONS</label>
                 <div class="terms-box">
                     <strong>1. Ticket Usage:</strong> Tickets issued are valid only for the date of the event.<br><br>
-                    <strong>2. Verification:</strong> Payment verification may take up to 24 hours. Once verified, a unique QR ticket will be sent to your email.<br><br>
+                    <strong>2. Verification:</strong> Payment verification may take up to 24-48 hours. Once verified, a unique QR ticket will be sent to your email.<br><br>
                     <strong>3. Refunds:</strong> Registration is non-refundable unless the event is officially canceled by the organizers.<br><br>
                     <strong>3. Transfer:</strong> Registration is non-transferable.<br><br>
                     <strong>4. Entry:</strong> Present your QR code at the door. No QR, no entry.
