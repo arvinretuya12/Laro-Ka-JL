@@ -124,7 +124,14 @@ $is_full = ($current_total >= $max_registrants);
             
             <div class="form-group">
                 <label>UPLOAD PROOF OF PAYMENT</label>
-                <input type="file" name="payment_proof" accept="image/*" required style="background: transparent; border: none; padding: 0;">
+                
+                <!-- Hidden actual file input -->
+                <input type="file" id="payment_proof" name="payment_proof" accept="image/*" required style="display: none;" onchange="updateFileName(this)">
+                
+                <!-- Giant clickable UI button -->
+                <label for="payment_proof" class="custom-file-upload">
+                    <span id="file-name">📸 TAP HERE TO UPLOAD RECEIPT</span>
+                </label>
             </div>
 
             <div class="form-group">
