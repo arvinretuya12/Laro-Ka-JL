@@ -116,7 +116,7 @@ $is_full = ($current_total >= $max_registrants);
             <hr style="border: 1px dashed #863fa9; margin: 30px 0;">
             
             <h2 style="font-size: 24px;">INSERT COIN (PAYMENT)</h2>
-            <p style="text-align: center; color: #f0eadd; font-family: 'Arial'; font-size: 14px;">Scan the GCash QR code below. Registration Fee: PHP 1000.00</p>
+            <p style="text-align: center; color: #f0eadd; font-family: 'Arial'; font-size: 14px;">Scan the GCash QR code below. Registration Fee: <b>PHP 1000.00</b></p>
             
             <div style="text-align: center;">
                 <img src="assets/images/gcash-joloverse.jpg" alt="GCash QR" style="width: 200px; border: 4px solid #863fa9; margin-bottom: 15px;">
