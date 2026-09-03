@@ -1,6 +1,7 @@
 <?php
 require 'auth.php';
 require '../php/db_connect.php';
+require '../php/logger.php'; // Include your custom logger!
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = intval($_POST['user_id']);
@@ -21,18 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $update_stmt->bind_param("si", $new_email, $user_id);
 
             if ($update_stmt->execute()) {
-                // Log action to activity_logs
-                $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
-                $log_msg = "Updated player #{$user_id} email from '{$old_email}' to '{$new_email}'";
+                // Log action using your existing logger function
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start(); 
+                }
+                $current_admin = isset($_SESSION['admin_username']) ? $_SESSION['admin_username'] : 'System';
                 
-                $log_stmt = $conn->prepare("INSERT INTO activity_logs (admin_username, action, ip_address) VALUES (?, ?, ?)");
-                $log_stmt->bind_param("sss", $admin_username, $log_msg, $ip);
-                $log_stmt->execute();
+                log_activity($conn, 'Admin', $current_admin, "Updated player #{$user_id} email from '{$old_email}' to '{$new_email}'");
             }
         }
     }
 }
 
+// Redirect back to dashboard
 header("Location: index.php");
 exit();
 ?>
