@@ -78,17 +78,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <h3 style='color: #a0862d; margin-top: 0; margin-bottom: 15px; font-size: 16px; text-align: center; letter-spacing: 1px;'>EVENT DETAILS</h3>
                         
                         <p style='margin: 0 0 10px 0; font-size: 15px; line-height: 1.5;'>
-                            <strong style='color: #fff;'>Date:</strong> September 12, 2026<br>
+                            <strong style='color: #fff;'>Date:</strong> September 19, 2026<br>
                             <strong style='color: #fff;'>Time:</strong> 3:00 PM to 7:00 PM
                         </p>
                         <p style='margin: 0 0 15px 0; font-size: 15px; line-height: 1.5;'>
-                            <strong style='color: #fff;'>Location:</strong> Upper Room Events Hall<br>
-                            <span style='font-size: 13px; color: #ccc;'>851 AH Lacson Ave. Cor. España Blvd. Manila</span>
+                            <strong style='color: #fff;'>Location:</strong> To be Announced<br>
+                            <span style='font-size: 13px; color: #ccc;'>We will notify you of the location details soon.</span>
                         </p>
                         
-                        <div style='text-align: center; margin-top: 15px;'>
-                            <a href='https://share.google/jkwm2o8Fo7xfHXbLq' target='_blank' style='display: inline-block; background-color: #a0862d; color: #1a0026; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 14px;'>View on Google Maps</a>
-                        </div>
+                        // <div style='text-align: center; margin-top: 15px;'>
+                        //     <a href='https://share.google/jkwm2o8Fo7xfHXbLq' target='_blank' style='display: inline-block; background-color: #a0862d; color: #1a0026; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 14px;'>View on Google Maps</a>
+                        // </div>
                     </div>
                     
                     <p style='font-size: 16px; margin-bottom: 15px;'>Attached to this email is your unique QR Code Ticket.</p>
