@@ -85,10 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <strong style='color: #fff;'>Location:</strong> To be Announced<br>
                             <span style='font-size: 13px; color: #ccc;'>We will notify you of the location details soon.</span>
                         </p>
-                        
-                        // <div style='text-align: center; margin-top: 15px;'>
-                        //     <a href='https://share.google/jkwm2o8Fo7xfHXbLq' target='_blank' style='display: inline-block; background-color: #a0862d; color: #1a0026; padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 5px; font-size: 14px;'>View on Google Maps</a>
-                        // </div>
+            
                     </div>
                     
                     <p style='font-size: 16px; margin-bottom: 15px;'>Attached to this email is your unique QR Code Ticket.</p>
