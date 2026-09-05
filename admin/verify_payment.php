@@ -82,8 +82,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <strong style='color: #fff;'>Time:</strong> 3:00 PM to 7:00 PM
                         </p>
                         <p style='margin: 0 0 15px 0; font-size: 15px; line-height: 1.5;'>
-                            <strong style='color: #fff;'>Location:</strong> To be Announced<br>
-                            <span style='font-size: 13px; color: #ccc;'>We will notify you of the location details soon.</span>
+                            <strong style='color: #fff;'>Location:</strong> MACK EVENT PLACE<br>
+                            <span style='font-size: 13px; color: #ccc;'>LCSM Bldg. 1621 Maceda St. Brgy. 497, Sampaloc, Manila, 1008</span><br>
+                            <a href='https://maps.app.goo.gl/eFc4KoxmWRaWXMxd6' target='_blank' style='display: inline-block; margin-top: 10px; color: #2ecc71; text-decoration: none; font-weight: bold; border: 1px solid #2ecc71; padding: 5px 10px; border-radius: 4px; font-size: 12px;'>📍 VIEW ON GOOGLE MAPS</a>
                         </p>
             
                     </div>

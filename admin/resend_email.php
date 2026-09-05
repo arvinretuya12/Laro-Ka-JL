@@ -63,35 +63,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $mail->isHTML(true);
                 $mail->Subject = 'Your Laro Ka JL Registration is Verified! (Resent)'; // Added (Resent) to subject line
                 $mail->Body    = "
-                    <div style='background:#1a0026; padding:30px; border: 3px solid #863fa9; border-radius: 10px; color:#f0eadd; font-family:Arial, sans-serif; text-align:center; max-width: 500px; margin: 0 auto;'>
-                        <h1 style='color:#a0862d; margin-top: 0; font-size: 26px;'>PAYMENT VERIFIED</h1>
-                        <p style='font-size: 18px; font-weight: bold; color: #a0862d;'>Hi {$first_name},</p>
-                        <p style='font-size: 16px; line-height: 1.5; margin-bottom: 25px;'>Your payment for <strong>Laro Ka JL: 25th Birthday Celebration</strong> has been verified successfully!</p>
+                <div style='background:#1a0026; padding:30px; border: 3px solid #863fa9; border-radius: 10px; color:#f0eadd; font-family:Arial, sans-serif; text-align:center; max-width: 500px; margin: 0 auto;'>
+                    <h1 style='color:#a0862d; margin-top: 0; font-size: 26px;'>PAYMENT VERIFIED</h1>
+                    <p style='font-size: 18px; font-weight: bold; color: #a0862d;'>Hi {$first_name},</p>
+                    <p style='font-size: 16px; line-height: 1.5; margin-bottom: 25px;'>Your payment for <strong>Laro Ka JL: 25th Birthday Celebration</strong> has been verified successfully!</p>
+                    
+                    <!-- Event Details Box -->
+                    <div style='background: #390055; padding: 20px; border-radius: 8px; text-align: left; margin: 0 auto 25px auto; border: 1px solid #a0862d;'>
+                        <h3 style='color: #a0862d; margin-top: 0; margin-bottom: 15px; font-size: 16px; text-align: center; letter-spacing: 1px;'>EVENT DETAILS</h3>
                         
-                        <!-- Event Details Box -->
-                        <div style='background: #390055; padding: 20px; border-radius: 8px; text-align: left; margin: 0 auto 25px auto; border: 1px solid #a0862d;'>
-                            <h3 style='color: #a0862d; margin-top: 0; margin-bottom: 15px; font-size: 16px; text-align: center; letter-spacing: 1px;'>EVENT DETAILS</h3>
-                            
-                            <p style='margin: 0 0 10px 0; font-size: 15px; line-height: 1.5;'>
-                                <strong style='color: #fff;'>Date:</strong> September 19, 2026<br>
-                                <strong style='color: #fff;'>Time:</strong> 3:00 PM to 7:00 PM
-                            </p>
-                            <p style='margin: 0 0 15px 0; font-size: 15px; line-height: 1.5;'>
-                                <strong style='color: #fff;'>Location:</strong> To be Announced<br>
-                                <span style='font-size: 13px; color: #ccc;'>We will notify you of the location details soon.</span>
-                            </p>
-                
-                        </div>
-                        
-                        <p style='font-size: 16px; margin-bottom: 15px;'>Attached to this email is your unique QR Code Ticket.</p>
-                        
-                        <div style='background: #222; padding: 15px; margin: 0 auto 20px auto; border: 2px dashed #a0862d; max-width: 250px;'>
-                            <p style='margin: 0; font-size: 14px; color: #ccc;'>TICKET ID</p>
-                            <p style='margin: 5px 0 0 0; font-size: 20px; font-weight: bold; color: #fff; letter-spacing: 1px;'>{$qr_token}</p>
-                        </div>
-                        
-                        <p style='font-size: 14px; color: #ff3333; font-weight: bold; margin-bottom: 0;'>Please download the attached QR code and present it at the event entrance.</p>
+                        <p style='margin: 0 0 10px 0; font-size: 15px; line-height: 1.5;'>
+                            <strong style='color: #fff;'>Date:</strong> September 19, 2026<br>
+                            <strong style='color: #fff;'>Time:</strong> 3:00 PM to 7:00 PM
+                        </p>
+                        <p style='margin: 0 0 15px 0; font-size: 15px; line-height: 1.5;'>
+                            <strong style='color: #fff;'>Location:</strong> MACK EVENT PLACE<br>
+                            <span style='font-size: 13px; color: #ccc;'>LCSM Bldg. 1621 Maceda St. Brgy. 497, Sampaloc, Manila, 1008</span><br>
+                            <a href='https://maps.app.goo.gl/eFc4KoxmWRaWXMxd6' target='_blank' style='display: inline-block; margin-top: 10px; color: #2ecc71; text-decoration: none; font-weight: bold; border: 1px solid #2ecc71; padding: 5px 10px; border-radius: 4px; font-size: 12px;'>📍 VIEW ON GOOGLE MAPS</a>
+                        </p>
+            
                     </div>
+                    
+                    <p style='font-size: 16px; margin-bottom: 15px;'>Attached to this email is your unique QR Code Ticket.</p>
+                    
+                    <div style='background: #222; padding: 15px; margin: 0 auto 20px auto; border: 2px dashed #a0862d; max-width: 250px;'>
+                        <p style='margin: 0; font-size: 14px; color: #ccc;'>TICKET ID</p>
+                        <p style='margin: 5px 0 0 0; font-size: 20px; font-weight: bold; color: #fff; letter-spacing: 1px;'>{$qr_token}</p>
+                    </div>
+                    
+                    <p style='font-size: 14px; color: #ff3333; font-weight: bold; margin-bottom: 0;'>Please download the attached QR code and present it at the event entrance.</p>
+                </div>
                 ";
 
                 $mail->send();
