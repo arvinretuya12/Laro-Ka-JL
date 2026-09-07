@@ -1,7 +1,12 @@
 <?php
-session_start();
+// 1. Safely start the session only if it hasn't been started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 // Make sure this points to your correct db_connect.php path
 require 'php/db_connect.php'; 
+require 'php/logger.php'; // 2. Include your reliable logger!
 
 // --- NEW: UNIQUE VISITOR TRACKING & LOCATION ---
 if (!isset($_SESSION['has_visited'])) {
@@ -11,7 +16,9 @@ if (!isset($_SESSION['has_visited'])) {
     // Fetch Location from IP (Skip if running on local test server)
     if ($ip !== '127.0.0.1' && $ip !== '::1' && $ip !== 'Unknown') {
         $ctx = stream_context_create(['http' => ['timeout' => 2]]); 
+        // Using @ prevents fatal errors if your AWS server blocks external URL fetching
         $geo_data = @file_get_contents("http://ip-api.com/json/{$ip}", false, $ctx);
+        
         if ($geo_data) {
             $geo = json_decode($geo_data, true);
             if (isset($geo['status']) && $geo['status'] === 'success') {
@@ -20,16 +27,8 @@ if (!isset($_SESSION['has_visited'])) {
         }
     }
 
-    // Log the visit into activity_logs
-    $actor_type = 'Visitor';
-    $actor_name = 'Anonymous';
-    $action = "Visited Homepage - " . $location;
-    
-    $stmt = $conn->prepare("INSERT INTO activity_logs (actor_type, actor_name, action_description, ip_address) VALUES (?, ?, ?, ?)");
-    if ($stmt) {
-        $stmt->bind_param("ssss", $actor_type, $actor_name, $action, $ip);
-        $stmt->execute();
-    }
+    // 3. Log the visit using your existing, safe logger function
+    log_activity($conn, 'Visitor', 'Anonymous', "Visited Homepage - " . $location);
     
     // Set session so they are only counted once per visit
     $_SESSION['has_visited'] = true; 
