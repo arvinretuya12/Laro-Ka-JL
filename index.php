@@ -1,6 +1,40 @@
 <?php
+session_start();
 // Make sure this points to your correct db_connect.php path
 require 'php/db_connect.php'; 
+
+// --- NEW: UNIQUE VISITOR TRACKING & LOCATION ---
+if (!isset($_SESSION['has_visited'])) {
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
+    $location = 'Unknown Location';
+    
+    // Fetch Location from IP (Skip if running on local test server)
+    if ($ip !== '127.0.0.1' && $ip !== '::1' && $ip !== 'Unknown') {
+        $ctx = stream_context_create(['http' => ['timeout' => 2]]); 
+        $geo_data = @file_get_contents("http://ip-api.com/json/{$ip}", false, $ctx);
+        if ($geo_data) {
+            $geo = json_decode($geo_data, true);
+            if (isset($geo['status']) && $geo['status'] === 'success') {
+                $location = $geo['city'] . ', ' . $geo['country'];
+            }
+        }
+    }
+
+    // Log the visit into activity_logs
+    $actor_type = 'Visitor';
+    $actor_name = 'Anonymous';
+    $action = "Visited Homepage - " . $location;
+    
+    $stmt = $conn->prepare("INSERT INTO activity_logs (actor_type, actor_name, action_description, ip_address) VALUES (?, ?, ?, ?)");
+    if ($stmt) {
+        $stmt->bind_param("ssss", $actor_type, $actor_name, $action, $ip);
+        $stmt->execute();
+    }
+    
+    // Set session so they are only counted once per visit
+    $_SESSION['has_visited'] = true; 
+}
+// -----------------------------------------------
 
 // Check capacity limit vs current registrants
 $limit_check = $conn->query("SELECT setting_value FROM event_settings WHERE setting_key = 'max_registrants'");
@@ -140,8 +174,8 @@ $is_full = ($current_total >= $max_registrants);
                     <strong>1. Ticket Usage:</strong> Tickets issued are valid only for the date of the event.<br><br>
                     <strong>2. Verification:</strong> Payment verification may take up to 24-48 hours. Once verified, a unique QR ticket will be sent to your email.<br><br>
                     <strong>3. Refunds:</strong> Registration is non-refundable unless the event is officially canceled by the organizers.<br><br>
-                    <strong>3. Transfer:</strong> Registration is non-transferable.<br><br>
-                    <strong>4. Entry:</strong> Present your QR code at the door. No QR, no entry.
+                    <strong>4. Transfer:</strong> Registration is non-transferable.<br><br>
+                    <strong>5. Entry:</strong> Present your QR code at the door. No QR, no entry.
                 </div>
                 <input type="checkbox" id="terms" required style="width: auto; margin-right: 10px;">
                 <label for="terms" style="display:inline; color:#a0862d;">I AGREE TO THE RULES OF THE GAME</label>

@@ -8,6 +8,17 @@ if ($admin_role !== 'Super Admin') {
     exit();
 }
 
+// --- NEW: FETCH VISITOR COUNTS ---
+$total_query = $conn->query("SELECT COUNT(*) as cnt FROM activity_logs WHERE actor_type = 'Visitor'");
+$total_visitors = $total_query->fetch_assoc()['cnt'];
+
+$month_query = $conn->query("SELECT COUNT(*) as cnt FROM activity_logs WHERE actor_type = 'Visitor' AND MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE())");
+$month_visitors = $month_query->fetch_assoc()['cnt'];
+
+$today_query = $conn->query("SELECT COUNT(*) as cnt FROM activity_logs WHERE actor_type = 'Visitor' AND DATE(created_at) = CURDATE()");
+$today_visitors = $today_query->fetch_assoc()['cnt'];
+// ---------------------------------
+
 // Fetch the latest 500 logs
 $logs_query = $conn->query("SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT 500");
 ?>
@@ -46,6 +57,23 @@ $logs_query = $conn->query("SELECT * FROM activity_logs ORDER BY created_at DESC
         <h1 style="font-family: 'DetailsFont', sans-serif; color: #f0eadd;">SYSTEM LOGS</h1>
         <p style="color: #ccc; margin-top: -15px; margin-bottom: 30px;">Monitoring all admin actions and player registrations.</p>
         
+        <!-- NEW: VISITOR METRICS -->
+        <div style="display: flex; gap: 20px; margin-bottom: 30px;">
+            <div style="flex: 1; background: #222; border: 2px solid #863fa9; padding: 20px; border-radius: 8px; text-align: center;">
+                <h3 style="color: #a0862d; margin: 0 0 10px 0; font-size: 14px;">TODAY'S VISITORS</h3>
+                <p style="color: #fff; font-size: 28px; font-weight: bold; margin: 0;"><?php echo $today_visitors; ?></p>
+            </div>
+            <div style="flex: 1; background: #222; border: 2px solid #863fa9; padding: 20px; border-radius: 8px; text-align: center;">
+                <h3 style="color: #a0862d; margin: 0 0 10px 0; font-size: 14px;">THIS MONTH</h3>
+                <p style="color: #fff; font-size: 28px; font-weight: bold; margin: 0;"><?php echo $month_visitors; ?></p>
+            </div>
+            <div style="flex: 1; background: #222; border: 2px solid #863fa9; padding: 20px; border-radius: 8px; text-align: center;">
+                <h3 style="color: #a0862d; margin: 0 0 10px 0; font-size: 14px;">TOTAL VISITORS</h3>
+                <p style="color: #fff; font-size: 28px; font-weight: bold; margin: 0;"><?php echo $total_visitors; ?></p>
+            </div>
+        </div>
+        <!-- ---------------------- -->
+        
         <table class="data-table">
             <thead>
                 <tr>
@@ -65,6 +93,7 @@ $logs_query = $conn->query("SELECT * FROM activity_logs ORDER BY created_at DESC
                             <?php 
                             if ($row['actor_type'] == 'Admin') echo "<span style='color: #e74c3c; font-weight: bold;'>ADMIN</span>";
                             elseif ($row['actor_type'] == 'Registrant') echo "<span style='color: #2ecc71; font-weight: bold;'>PLAYER</span>";
+                            elseif ($row['actor_type'] == 'Visitor') echo "<span style='color: #3498db; font-weight: bold;'>VISITOR</span>";
                             else echo "<span style='color: #f1c40f; font-weight: bold;'>SYSTEM</span>";
                             ?>
                         </td>
