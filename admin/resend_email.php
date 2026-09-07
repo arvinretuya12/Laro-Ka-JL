@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                         <p style='margin: 0 0 10px 0; font-size: 15px; line-height: 1.5;'>
                             <strong style='color: #fff;'>Date:</strong> September 19, 2026<br>
-                            <strong style='color: #fff;'>Time:</strong> 3:00 PM to 7:00 PM
+                            <strong style='color: #fff;'>Time:</strong> 4:00 PM to 8:00 PM
                         </p>
                         <p style='margin: 0 0 15px 0; font-size: 15px; line-height: 1.5;'>
                             <strong style='color: #fff;'>Location:</strong> MACK EVENT PLACE<br>
