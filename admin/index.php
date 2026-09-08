@@ -127,7 +127,7 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
                         // --- UPDATED: Action Column ---
                         echo "<td>";
                         if ($status !== 'Verified') {
-                            echo "<form action='verify_payment.php' method='POST' style='display:inline;'>
+                            echo "<form action='verify_payment.php' method='POST' style='display:inline;' onsubmit='return disableVerifyBtn(this);'>
                                     <input type='hidden' name='user_id' value='" . $row['id'] . "'>
                                     <input type='hidden' name='user_email' value='" . htmlspecialchars($row['email']) . "'>
                                     <button type='submit' class='btn-verify'>Verify</button>
@@ -228,6 +228,25 @@ $registrants_query = $conn->query("SELECT * FROM registrants ORDER BY registrati
         }
         function closeFlagModal() {
             document.getElementById('flagModal').style.display = 'none';
+        }
+        function disableVerifyBtn(form) {
+            // Find the submit button inside the specific form that was clicked
+            const btn = form.querySelector('.btn-verify');
+            
+            // If it's already disabled, stop the form from submitting again
+            if (btn.disabled) {
+                return false; 
+            }
+            
+            // Lock the button, change the color, and update the text
+            btn.disabled = true;
+            btn.innerHTML = '⏳ VERIFYING...';
+            btn.style.backgroundColor = '#555'; // Grey out the button
+            btn.style.cursor = 'not-allowed';
+            btn.style.color = '#fff';
+            
+            // Allow the form to submit normally to verify_payment.php
+            return true; 
         }
     </script>
 

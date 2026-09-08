@@ -16,6 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = (int)$_POST['user_id'];
     $user_email = $conn->real_escape_string($_POST['user_email']);
 
+    // --- NEW: DOUBLE-SUBMIT SHIELD ---
+    $status_check = $conn->query("SELECT payment_status FROM registrants WHERE id = $user_id");
+    if ($status_check && $status_check->num_rows > 0) {
+        $status_data = $status_check->fetch_assoc();
+        if ($status_data['payment_status'] === 'Verified') {
+            // They are already verified! Stop the script and send them back.
+            header("Location: index.php?status=already_verified");
+            exit();
+        }
+    }
+    // ---------------------------------
+
     // 1. Fetch the user's First Name from the database
     $user_query = $conn->query("SELECT first_name FROM registrants WHERE id = $user_id");
     $first_name = "Player"; // Default fallback
